@@ -63,6 +63,7 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "redux": "^3.6.0",
+    "redux-actions": "^0.12.0",
     "redux-immutable": "^3.0.8",
     "redux-logger": "^2.7.0",
     "redux-saga": "^0.12.0",
@@ -71,12 +72,9 @@
     "supertest": "^2.0.0",
     "webpack": "^1.8.4"
   },
-  "repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/polesskiy-dev/mern-boilerplate"
-},
-  "licenses" :{
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/mit-license.php"
-    }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/polesskiy-dev/mern-boilerplate"
+  },
+  "license": "MIT"
 }
