@@ -59,6 +59,10 @@
     "less-loader": "^2.2.3",
     "mocha": "^3.0.2",
     "phantomjs-prebuilt": "^2.1.12",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "redux": "^3.6.0",
+    "router": "^1.1.4",
     "style-loader": "^0.13.1",
     "supertest": "^2.0.0",
     "webpack": "^1.8.4"
