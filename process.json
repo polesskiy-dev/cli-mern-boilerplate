@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "mern-boilerplate",
+      "script": "./bin/www",
+      "autorestart": true,
+      "instances": 1,
+      "exec_mode": "fork",
+      "merge_logs": true,
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 8080
+      }
+    }
+  ]
+}
