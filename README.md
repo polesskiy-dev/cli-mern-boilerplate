@@ -1,5 +1,6 @@
+This is a MERN stack app boilerplate (MongoDB, Express, React-Redux and Node.js) based on Express app skeleton.
+ 
 [![Build Status](https://travis-ci.org/polesskiy-dev/mern-boilerplate.svg?branch=master)](https://travis-ci.org/polesskiy-dev/mern-boilerplate)
-This is a MERN stack app boilerplate (MongoDB, Express, React-Redux and Node.js) based on Express app skeleton. 
 
 # Installation:
 
