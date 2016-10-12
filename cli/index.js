@@ -57,28 +57,38 @@ function init(appName) {
   //   })
   //   .then(()=>copyDirRecursively(destinationFolder))
 
-  copyDirRecursively(boilerplateLink, destinationFolder)
+  copyDirRecursively(boilerplateLink, destinationFolder, /^node_modules$|^cli$/)
 }
 
 function copyDirRecursively(src, dest, filter) {
-  fs.rmdirSync(dest);
-  fs.mkdirSync(dest);
+  //remove destination directory if exists and creates new one
+  try {
+    fs.accessSync(dest);
+    fs.rmdirSync(dest);
+    fs.mkdirSync(dest);
+  } catch (e) {
+    fs.mkdirSync(dest);
+  }
 
+  //obtain all file names from src directory
   const fileNames = fs.readdirSync(src);
 
   for (const fileName of fileNames) {
-    const filePath = src + '/' + fileName;
-    const isFile = fs.statSync(filePath).isFile();
-    console.log(`Copying ${isFile ? "file" : "dir"} ${fileName} to ${dest}`);
+    let isForCopying = true;
+    if (filter instanceof RegExp) isForCopying = !filter.test(fileName);
 
-    if (!isFile) copyDirRecursively(filePath, dest + '/' + fileName)
+    if (isForCopying) {
+      const filePath = src + '/' + fileName;
+      const isFile = fs.statSync(filePath).isFile();
+      console.log(`Copying ${isFile ? "file" : "dir"} ${fileName} to ${dest}`);
+
+      if (isFile)
+        fs.createReadStream(filePath).pipe(fs.createWriteStream(dest + '/' + fileName));
+      else
+        copyDirRecursively(filePath, dest + '/' + fileName)
+    }
   }
 
-  // var exists = fs.existsSync(src);
-
-  //console.log("Destination folder: %s", destinationFolder);
-
-  // fs.createReadStream(boilerplateLink, {flags: 'r'}).pipe(fs.createWriteStream(destinationFolder));
 }
 
 
