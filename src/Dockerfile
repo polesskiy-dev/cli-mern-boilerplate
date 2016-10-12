@@ -13,5 +13,5 @@ COPY . /usr/src/app
 
 ENV NODE_ENV production
 
-EXPOSE 8000
+EXPOSE 3000
 CMD [ "npm", "start" ]
