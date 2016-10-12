@@ -1,6 +1,6 @@
 {
   "name": "cli-mern-boilerplate",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "author": {
     "name": "polesskiy",
@@ -15,8 +15,7 @@
     "build:client": "webpack --config webpack.config,dev.js --progress --profile",
     "build:client:production": "webpack --config webpack.config.prod.js --progress --profile",
     "test:client": "karma start karma.conf.js",
-    "test:server": "mocha spec -c --require babel-register",
-    "test": "npm run test:server && npm run test:client"
+    "test:server": "mocha spec -c --require babel-register"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
