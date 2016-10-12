@@ -16,7 +16,6 @@ const rl = readline.createInterface({
 
 const askName = ()=> new Promise((resolve)=> rl.question("What's your name? ", answer => resolve(answer)));
 const askEmail = ()=> new Promise((resolve)=> rl.question("What's your email? ", answer => resolve(answer)));
-const askGit = ()=> new Promise((resolve)=> rl.question("What's your git url? ", answer => resolve(answer)));
 const askLooksPretty = ()=> new Promise((resolve)=> rl.question(JSON.stringify(pkg, null, " ") + "\r\nIs it looks pretty Yes/no?", answer => resolve(answer)));
 
 /**
@@ -40,28 +39,35 @@ function init(appName) {
   const destinationFolder = `${path.resolve()}/${appName}/`;
   console.log("MERN boilerplate will be initialized in directory: %s", destinationFolder);
   pkg.name = appName;
+  delete pkg.repository;
 
-  // return askName()
-  //   .then((name)=> pkg.author.name = name)
-  //   .then(askEmail)
-  //   .then((email)=>pkg.author.email = email)
-  //   .then(askGit)
-  //   .then((git)=>pkg.repository.url = git)
-  //   .then(askLooksPretty)
-  //   //if answer not "yes" or empty - start init from beginning
-  //   .then((answer)=>(answer.trim() === 'yes' || '\r' ? '' : init(appName)))
-  //   .then(()=> {
-  //     rl.close();
-  //     process.stdin.destroy();
-  //     console.log(pkg);
-  //   })
-  //   .then(()=>copyDirRecursively(destinationFolder))
-
-  copyDirRecursively(boilerplateLink, destinationFolder, /^node_modules$|^cli$/)
+  return (
+    askName()
+      .then((name)=> pkg.author.name = name)
+      .then(askEmail)
+      .then((email)=>pkg.author.email = email)
+      .then(askLooksPretty)
+      //if answer not "yes" or empty - start init from beginning
+      .then((answer)=>(answer.trim() === 'yes' || '\r' ? '' : init(appName)))
+      .then(()=> {
+        rl.close();
+        process.stdin.destroy();
+        console.log(pkg);
+      })
+      .then(()=>copyDirRecursively(boilerplateLink, destinationFolder, /^package.json$|^node_modules$|^cli$|^.git(?!.*ignore)|^.idea/))
+      .then(()=>fs.writeFile(destinationFolder + '/package.json', JSON.stringify(pkg, null, ' ')))
+  )
 }
 
+/**
+ * Copy dir recursively
+ *
+ * @param {string} src - source folder
+ * @param {string} dest - destination folder
+ * @param {RegExp} filter - ignore this names
+ */
 function copyDirRecursively(src, dest, filter) {
-  //remove destination directory if exists and creates new one
+  /** remove destination directory if exists and creates new one*/
   try {
     fs.accessSync(dest);
     fs.rmdirSync(dest);
@@ -73,22 +79,20 @@ function copyDirRecursively(src, dest, filter) {
   //obtain all file names from src directory
   const fileNames = fs.readdirSync(src);
 
+  /** iterate through all files and folders in src dir */
   for (const fileName of fileNames) {
-    let isForCopying = true;
-    if (filter instanceof RegExp) isForCopying = !filter.test(fileName);
-
-    if (isForCopying) {
+    if (filter instanceof RegExp && !filter.test(fileName)) {
       const filePath = src + '/' + fileName;
       const isFile = fs.statSync(filePath).isFile();
+
       console.log(`Copying ${isFile ? "file" : "dir"} ${fileName} to ${dest}`);
 
       if (isFile)
         fs.createReadStream(filePath).pipe(fs.createWriteStream(dest + '/' + fileName));
       else
-        copyDirRecursively(filePath, dest + '/' + fileName)
+        copyDirRecursively(filePath, dest + fileName, filter)
     }
   }
-
 }
 
 
