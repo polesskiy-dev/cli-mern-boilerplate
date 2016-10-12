@@ -1,6 +1,6 @@
 {
-  "name": "cli-mern-boilerplate",
-  "version": "0.0.5",
+  "name": "@polesskiy/cli-mern-boilerplate",
+  "version": "0.0.8",
   "private": false,
   "author": {
     "name": "polesskiy",

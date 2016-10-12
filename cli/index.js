@@ -90,7 +90,7 @@ function copyDirRecursively(src, dest, filter) {
       if (isFile)
         fs.createReadStream(filePath).pipe(fs.createWriteStream(dest + '/' + fileName));
       else
-        copyDirRecursively(filePath, dest + fileName, filter)
+        copyDirRecursively(filePath, dest + '/' + fileName, filter)
     }
   }
 }
