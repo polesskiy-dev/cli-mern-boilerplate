@@ -4,10 +4,10 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const program = require('commander');
-const boilerplateLink = "/usr/local/lib/node_modules/" + Object.keys(require('../package.json').bin)[0] + "/src";
+const boilerplateSrcPath = path.resolve(process.execPath, '..', '..', 'lib', 'node_modules', 'cli-mern-boilerplate', 'src');
 let packageTemplate = require('../src/package.json');
 
-/** init node readline*/
+/** init readline node module*/
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -26,10 +26,6 @@ program
     .description('Create application')
     .option('-n, --name', 'Name of new application')
     .action(init)
-
-program
-    .command('i')
-    .action(()=>console.log("hello"))
 
 program
     .parse(process.argv); // end with parse to parse through the input
@@ -59,7 +55,7 @@ function init(appName) {
                 process.stdin.destroy();
                 console.log(packageTemplate);
             })
-            .then(()=>copyDirRecursively(boilerplateLink, destinationFolder, /^package.json$|^node_modules$|^cli$|^.git(?!.*ignore)|^.idea/))
+            .then(()=>copyDirRecursively(boilerplateSrcPath, destinationFolder, /^package.json$|^node_modules$|^cli$|^.git(?!.*ignore)|^.idea/))
             .then(()=>fs.writeFile(destinationFolder + '/package.json', JSON.stringify(packageTemplate, null, ' ')))
     )
 }
