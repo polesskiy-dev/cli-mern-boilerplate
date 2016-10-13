@@ -12,7 +12,7 @@ import createLogger from 'redux-logger'
 import {fromJS} from 'immutable'
 
 import rootreducer from './reducers/root-reducer'
-import rootSaga from './sagas/root-saga'
+//import rootSaga from './sagas/root-saga'
 import routes from './routes'
 
 const initialState = fromJS({});
@@ -24,8 +24,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootreducer, initialState, applyMiddleware(sagaMiddleware, process.env.NODE_ENV ? createLogger() : {}));
 
 /** run root saga */
-sagaMiddleware.run(rootSaga);
-
+//sagaMiddleware.run(rootSaga);
 
 render(
 //Provider allows us to receive formFields from store of our app (by connect function)

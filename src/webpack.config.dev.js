@@ -12,7 +12,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve('./public'),
+    path: path.resolve('./public/bundle'),
     filename: '[name].js'
   },
 
@@ -59,11 +59,6 @@ module.exports = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-      filename: 'vendor.js',
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         CLIENT: JSON.stringify(true),

@@ -12,7 +12,7 @@ This is a MERN stack app boilerplate (MongoDB, Express, React-Redux and Node.js)
     $ cli-mern-boilerplate -h --help
      
     #init your project in the current directory 
-    $ cli-mern-boilerplate -n --name <name of yor project>
+    $ cli-mern-boilerplate init -n --name <name of yor project>
      
      
 

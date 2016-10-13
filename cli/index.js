@@ -6,6 +6,7 @@ const readline = require('readline');
 const program = require('commander');
 const boilerplateSrcPath = path.resolve(process.execPath, '..', '..', 'lib', 'node_modules', 'cli-mern-boilerplate', 'src');
 let packageTemplate = require('../src/package.json');
+let processTemplate = require('../src/process.json');
 
 /** init readline node module*/
 const rl = readline.createInterface({
@@ -39,8 +40,12 @@ program
 function init(appName) {
     const destinationFolder = `${path.resolve()}/${appName}/`;
     console.log("MERN boilerplate will be initialized in directory: %s", destinationFolder);
+
+    //edit package.json
     packageTemplate.name = appName;
     delete packageTemplate.repository;
+    //edit process.json
+    processTemplate.apps.name = appName;
 
     return (
         askName()
@@ -57,6 +62,8 @@ function init(appName) {
             })
             .then(()=>copyDirRecursively(boilerplateSrcPath, destinationFolder, /^package.json$|^node_modules$|^cli$|^.git(?!.*ignore)|^.idea/))
             .then(()=>fs.writeFile(destinationFolder + '/package.json', JSON.stringify(packageTemplate, null, ' ')))
+            .then(()=>fs.writeFile(destinationFolder + '/process.json', JSON.stringify(processTemplate, null, ' ')))
+            .catch(console.err)
     )
 }
 

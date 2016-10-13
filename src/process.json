@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "mern-boilerplate",
+      "name": "",
       "script": "./bin/www",
       "autorestart": true,
       "instances": 1,

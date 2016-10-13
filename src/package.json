@@ -8,12 +8,14 @@
   },
   "scripts": {
     "start": "pm2 flush && pm2 start process.json && pm2 logs",
-    "stop": "pm2 stop mern-boilerplate && pm2 delete mern-boilerplate",
+    "start:dev": "npm run build:client && npm run start:server",
+    "start:server": "node ./bin/www",
     "build:client": "webpack --config webpack.config,dev.js --progress --profile",
     "build:client:production": "webpack --config webpack.config.prod.js --progress --profile",
     "test:client": "karma start karma.conf.js",
     "test:server": "mocha spec -c --require babel-register",
-    "test": "npm run test:server && npm run test:client"
+    "test": "npm run test:server && npm run test:client",
+    "deploy": ""
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -22,7 +24,16 @@
     "express": "~4.13.4",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "immutable": "^3.8.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "redux": "^3.6.0",
+    "redux-actions": "^0.12.0",
+    "redux-immutable": "^3.0.8",
+    "redux-logger": "^2.7.0",
+    "redux-saga": "^0.12.0",
+    "router": "^1.1.4"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
@@ -47,7 +58,6 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "immutable": "^3.8.1",
     "json-loader": "^0.5.4",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
@@ -62,14 +72,6 @@
     "less-loader": "^2.2.3",
     "mocha": "^3.0.2",
     "phantomjs-prebuilt": "^2.1.12",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "redux": "^3.6.0",
-    "redux-actions": "^0.12.0",
-    "redux-immutable": "^3.0.8",
-    "redux-logger": "^2.7.0",
-    "redux-saga": "^0.12.0",
-    "router": "^1.1.4",
     "style-loader": "^0.13.1",
     "supertest": "^2.0.0",
     "webpack": "^1.8.4"
