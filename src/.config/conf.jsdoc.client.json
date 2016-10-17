@@ -1,0 +1,16 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": [
+      "jsdoc"
+    ]
+  },
+  "source": {
+    "include": "src-frontend"
+  },
+  "opts": {
+    "encoding": "utf8",
+    "destination": "docs/client/",
+    "recurse": true
+  }
+}

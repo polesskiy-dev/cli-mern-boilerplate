@@ -6,7 +6,7 @@ const readline = require('readline');
 const program = require('commander');
 const boilerplateSrcPath = path.resolve(process.execPath, '..', '..', 'lib', 'node_modules', 'cli-mern-boilerplate', 'src');
 let packageTemplate = require('../src/package.json');
-let processTemplate = require('../src/process.json');
+let processTemplate = require('../src//process.json');
 
 /** init readline node module*/
 const rl = readline.createInterface({

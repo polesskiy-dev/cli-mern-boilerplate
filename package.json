@@ -1,6 +1,6 @@
 {
   "name": "@polesskiy/cli-mern-boilerplate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "author": {
     "name": "polesskiy",
@@ -10,9 +10,11 @@
     "cli-mern-boilerplate": "./cli/index.js"
   },
   "scripts": {
+    "docs": "./node_modules/.bin/jsdoc cli --recurse --verbose --package package.json --destination docs"
   },
   "dependencies": {
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "jsdoc": "^3.4.2"
   },
   "repository": {
     "type": "git",
