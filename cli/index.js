@@ -6,7 +6,7 @@ const readline = require('readline');
 const program = require('commander');
 const boilerplateSrcPath = path.resolve(process.execPath, '..', '..', 'lib', 'node_modules', 'cli-mern-boilerplate', 'src');
 let packageTemplate = require('../src/package.json');
-let processTemplate = require('../src//process.json');
+let processTemplate = require('../src/.config/pm2.process.json');
 
 /** init readline node module*/
 const rl = readline.createInterface({
@@ -38,7 +38,7 @@ program
  * @returns {Promise.<TResult>}
  */
 function init(appName) {
-    const destinationFolder = `${path.resolve()}/${appName}/`;
+    const destinationFolder = path.resolve(appName);
     console.log("MERN boilerplate will be initialized in directory: %s", destinationFolder);
 
     //edit package.json
@@ -61,8 +61,8 @@ function init(appName) {
                 console.log(packageTemplate);
             })
             .then(()=>copyDirRecursively(boilerplateSrcPath, destinationFolder, /^package.json$|^node_modules$|^cli$|^.git(?!.*ignore)|^.idea/))
-            .then(()=>fs.writeFile(destinationFolder + '/package.json', JSON.stringify(packageTemplate, null, ' ')))
-            .then(()=>fs.writeFile(destinationFolder + '/process.json', JSON.stringify(processTemplate, null, ' ')))
+            .then(()=>fs.writeFile(path.join(destinationFolder, 'package.json'), JSON.stringify(packageTemplate, null, ' ')))
+            .then(()=>fs.writeFile(path.join(destinationFolder, '.config', 'pm2.process.json', JSON.stringify(processTemplate, null, ' ')))
             .catch(console.err)
     )
 }

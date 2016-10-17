@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/polesskiy-dev/mern-boilerplate.svg?branch=master)](https://travis-ci.org/polesskiy-dev/mern-boilerplate)
-
 # cli-mern-boilerplate
+
+[![Build Status](https://travis-ci.org/polesskiy-dev/mern-boilerplate.svg?branch=master)](https://travis-ci.org/polesskiy-dev/mern-boilerplate)
 
 This is a MERN scaffolding cli app boilerplate (MongoDB, Express, React-Redux and Node.js) based on Express app skeleton. Helps you to quick start MERN project with deploy scripts, tests and code quality control.
 
