@@ -2,14 +2,16 @@
 
 [![Build Status](https://travis-ci.org/polesskiy-dev/mern-boilerplate.svg?branch=master)](https://travis-ci.org/polesskiy-dev/mern-boilerplate)
 
-This is a MERN scaffolding cli app boilerplate (MongoDB, Express, React-Redux and Node.js) based on Express app skeleton. Helps you to quick start MERN project with deploy scripts, tests and code quality control.
+This is a MERN scaffolding cli boilerplate app(MongoDB, Express, React-Redux and Node.js) based on Express app skeleton. Helps you to quick start MERN project with deploy scripts, tests and code quality control.
 
 ## Quickstart
 
-    $ sudo npm install cli-mern-boilerplate -g
+    $ sudo npm install @polesskiy/cli-mern-boilerplate -g
     $ cli-mern-boilerplate init -n --name <name of yor project>
+    $ cd <name of yor project>
     $ npm install
-    $ npm start
+    $ npm run start:dev
+    $ start localhost:3000
 
 ## CLI commands
 

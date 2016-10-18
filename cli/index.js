@@ -62,7 +62,7 @@ function init(appName) {
             })
             .then(()=>copyDirRecursively(boilerplateSrcPath, destinationFolder, /^package.json$|^node_modules$|^cli$|^.git(?!.*ignore)|^.idea/))
             .then(()=>fs.writeFile(path.join(destinationFolder, 'package.json'), JSON.stringify(packageTemplate, null, ' ')))
-            .then(()=>fs.writeFile(path.join(destinationFolder, '.config', 'pm2.process.json', JSON.stringify(processTemplate, null, ' ')))
+            .then(()=>fs.writeFile(path.join(destinationFolder, '.config', 'pm2.process.json'), JSON.stringify(processTemplate, null, ' ')))
             .catch(console.err)
     )
 }

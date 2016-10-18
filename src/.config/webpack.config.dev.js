@@ -1,18 +1,19 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+//var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr';
 
 module.exports = {
   devtool: 'source-map',
 
   entry: {
-    app: [
-      './src-frontend/index.js'
-    ]
+    app: ['./src-frontend/index.js', hotMiddlewareScript]
   },
 
   output: {
-    path: path.resolve('./public/bundle'),
+    path: __dirname + '/../public/bundle',
+    publicPath: '/',
     filename: '[name].js'
   },
 
@@ -57,14 +58,12 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    //HMR
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        CLIENT: JSON.stringify(true),
-        'NODE_ENV': JSON.stringify('development')
-      }
-    })
+    //Forbid transpile while build has errors
+    new webpack.NoErrorsPlugin(),
+    //Extract css to single file
+    new ExtractTextPlugin('bundle.css'),
   ]
 };
 
