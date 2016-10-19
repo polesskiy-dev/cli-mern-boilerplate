@@ -1,10 +1,10 @@
 {
-  "name": "hello",
+  "name": "boilerplate",
   "version": "0.0.1",
   "private": false,
   "author": {
-    "name": "a",
-    "email": "a"
+    "name": "boilerplate",
+    "email": "boilerplate"
   },
   "scripts": {
     "start": "pm2 start .config/pm2.process.json && pm2 logs",
@@ -13,8 +13,9 @@
     "start:server": "node ./bin/www",
     "build:client": "webpack --config .config/webpack.config.dev.js --progress --profile",
     "build:client:production": "webpack --config .config/webpack.config.prod.js --progress --profile",
-    "test:client": "karma start karma.conf.js",
-    "test:server": "mocha spec -c --require babel-register",
+    "build:production": "npm run build:client:production && npm test && npm run docs:client && npm run docs:server",
+    "test:client": "karma start",
+    "test:server": "mocha spec --colors --recursive --require babel-register",
     "test": "npm run test:server && npm run test:client",
     "logs": "pm2 logs",
     "docs:client": "./node_modules/.bin/jsdoc --configure .config/conf.jsdoc.client.json",
@@ -82,6 +83,7 @@
     "less-loader": "^2.2.3",
     "mocha": "^3.1.2",
     "phantomjs-prebuilt": "^2.1.13",
+    "react-addons-test-utils": "^15.3.2",
     "style-loader": "^0.13.1",
     "supertest": "^2.0.0"
   },

@@ -17,6 +17,7 @@ const rl = readline.createInterface({
 
 const askName = ()=> new Promise((resolve)=> rl.question("What's your name? ", answer => resolve(answer)));
 const askEmail = ()=> new Promise((resolve)=> rl.question("What's your email? ", answer => resolve(answer)));
+const askDescription = ()=> new Promise((resolve)=> rl.question("Type short description of your project ", answer => resolve(answer)));
 const askLooksPretty = ()=> new Promise((resolve)=> rl.question(JSON.stringify(packageTemplate, null, " ") + "\r\nIs it looks pretty Yes/no?", answer => resolve(answer)));
 
 /**
@@ -26,6 +27,7 @@ program
     .command('init [directory]')
     .description('Create application')
     .option('-n, --name', 'Name of new application')
+    .option('-v, --verbose', 'Print verbose output')
     .action(init)
 
 program
@@ -49,9 +51,11 @@ function init(appName) {
 
     return (
         askName()
-            .then((name)=> packageTemplate.author.name = name)
+            .then(name=> packageTemplate.author.name = name)
             .then(askEmail)
-            .then((email)=>packageTemplate.author.email = email)
+            .then(email=>packageTemplate.author.email = email)
+            .then(askDescription)
+            .then(description=>packageTemplate.description = description)
             .then(askLooksPretty)
             //if answer not "yes" or empty - start init from beginning
             .then((answer)=>(answer.trim() === 'yes' || '\r' ? '' : init(appName)))
@@ -93,7 +97,8 @@ function copyDirRecursively(src, dest, filter) {
             const filePath = src + '/' + fileName;
             const isFile = fs.statSync(filePath).isFile();
 
-            console.log(`Copying ${isFile ? "file" : "dir"} ${fileName} to ${dest}`);
+            //print verbose info if appropriate key set
+            if (program.verbose) console.log(`Copying ${isFile ? "file" : "dir"} ${fileName} to ${dest}`);
 
             if (isFile)
                 fs.createReadStream(filePath).pipe(fs.createWriteStream(dest + '/' + fileName));

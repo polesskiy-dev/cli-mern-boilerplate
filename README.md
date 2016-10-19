@@ -19,7 +19,7 @@ This is a MERN scaffolding cli boilerplate app(MongoDB, Express, React-Redux and
     $ cli-mern-boilerplate -h --help
      
     #init your project in the current directory 
-    $ cli-mern-boilerplate init -n --name <name of yor project>
+    $ cli-mern-boilerplate init --name <name of yor project>
     
 ## Available result app commands
     
@@ -49,6 +49,10 @@ This is a MERN scaffolding cli boilerplate app(MongoDB, Express, React-Redux and
 |          	| less          	|           	| ExtractTextPlugin 	|                      	|
 |          	|               	|           	| UglifyJsPlugin    	|                      	|
 
+### Add code style to Webstorm
+
+[https://www.jetbrains.com/help/webstorm/2016.2/copying-code-style-settings.html](https://www.jetbrains.com/help/webstorm/2016.2/copying-code-style-settings.html) 
+ 
 ### Docker reference
 
     #build all by Dockerfile instructions image named as "username/appname"
