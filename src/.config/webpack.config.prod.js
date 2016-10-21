@@ -35,6 +35,8 @@ module.exports = {
         exclude: /node_modules/,
         query: {}
       },
+      //CSS
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
       // LESS
       {
         test: /\.(less|css)$/,
