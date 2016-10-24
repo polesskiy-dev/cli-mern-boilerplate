@@ -1,14 +1,13 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-//var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
 var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr';
 
 module.exports = {
   devtool: 'source-map',
 
   entry: {
-    app: ['./src-frontend/index.js', hotMiddlewareScript]
+    app: [hotMiddlewareScript, 'babel-polyfill', './src-frontend/index.js']
   },
 
   output: {
@@ -18,7 +17,8 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: ['./node_modules'],
   },
 
   module: {
@@ -41,7 +41,7 @@ module.exports = {
       { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
       // LESS
       {
-        test: /\.(less|css)$/,
+        test: /\.(less)$/,
         loader: ExtractTextPlugin.extract(
           'style',
           'css?modules&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]',
@@ -61,6 +61,7 @@ module.exports = {
 
   plugins: [
     //HMR
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     //Forbid transpile while build has errors
     new webpack.NoErrorsPlugin(),
