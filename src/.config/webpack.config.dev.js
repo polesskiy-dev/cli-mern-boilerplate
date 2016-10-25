@@ -48,14 +48,11 @@ module.exports = {
           'autoprefixer',
           'less')
       },
-      {
-        test: /\.(jpe?g|gif|png|svg)$/i,
-        loader: 'url-loader?limit=10000'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
+      // Font and images. Generate hashed file names to make them easy to cache.
+      { test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/, loader: 'url?limit=10000' },
+      { test: /\.((ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9]))|(ttf|eot)$/, loader: 'file' },
+      //json
+      { test: /\.json$/, loader: 'json' }
     ]
   },
 
