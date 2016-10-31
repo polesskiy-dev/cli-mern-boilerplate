@@ -1,4 +1,6 @@
 import React from 'react'
+
+import 'reset.less'
 import Hello from './Hello/Hello'
 
 /**
