@@ -1,17 +1,16 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr';
 
 module.exports = {
   devtool: 'source-map',
 
   entry: {
-    app: [hotMiddlewareScript, 'babel-polyfill', './src-frontend/index.js']
+    app: ['webpack-hot-middleware/client', 'babel-polyfill', './src-frontend/index.js']
   },
 
   output: {
-    path: __dirname + '/../public/bundle',
+    path: path.join(__dirname, '..', 'public', 'dist'),
     publicPath: '/',
     filename: '[name].js'
   },
@@ -33,9 +32,8 @@ module.exports = {
       //Compile ES6/7 to ES5 via babel
       {
         test: /\.(js)$/,
-        loader: ['babel-loader'],
-        exclude: /node_modules/,
-        query: {}
+        loaders: ['babel-loader'],
+        include: path.join(__dirname, '../src-frontend')
       },
       //CSS
       { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
@@ -63,7 +61,7 @@ module.exports = {
     //Forbid transpile while build has errors
     new webpack.NoErrorsPlugin(),
     //Extract css to single file
-    new ExtractTextPlugin('bundle.css'),
+    new ExtractTextPlugin('[name]-styles.css'),
   ]
 };
 

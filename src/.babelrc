@@ -1,8 +1,12 @@
 {
   "presets": ["react", "latest"],
+  "plugins": ["transform-decorators-legacy"],
   "env": {
     "production": {
       "presets": ["react", "react-optimize", "latest"]
+    },
+    "development": {
+      "presets": ["react-hmre"]
     }
   }
 }
