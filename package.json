@@ -1,13 +1,13 @@
 {
   "name": "@polesskiy/cli-mern-boilerplate",
-  "version": "0.2.5",
+  "version": "0.2.7",
   "private": false,
   "author": {
     "name": "polesskiy",
     "email": "polesskiy.dev@gmail.com"
   },
   "bin": {
-    "cli-mern-boilerplate": "./cli/index.js"
+    "cli-mern-boilerplate": "./bin/index.js"
   },
   "scripts": {
     "docs": "./node_modules/.bin/jsdoc cli --recurse --verbose --package package.json --destination docs"
