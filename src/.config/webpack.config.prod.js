@@ -6,7 +6,7 @@ module.exports = {
   devtool: 'cheap-module-source-map',
 
   entry: {
-    app: ['./src-frontend/index.js']
+    app: ['babel-polyfill', './src-frontend/index.js']
   },
 
   output: {
@@ -16,7 +16,8 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: ['./node_modules'],
   },
 
   module: {
@@ -31,15 +32,14 @@ module.exports = {
       //Compile ES6/7 to ES5 via babel
       {
         test: /\.(js)$/,
-        loader: ['babel-loader'],
-        exclude: /node_modules/,
-        query: {}
+        loaders: ['babel-loader'],
+        include: path.join(__dirname, '../src-frontend')
       },
       //CSS
       { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
       // LESS
       {
-        test: /\.(less|css)$/,
+        test: /\.(less)$/,
         loader: ExtractTextPlugin.extract(
           'style',
           'css?modules&importLoaders=1&localIdentName=[name]---[local]---[hash:base64:5]',
@@ -48,7 +48,7 @@ module.exports = {
       },
       // Font and images. Generate hashed file names to make them easy to cache.
       { test: /\.((woff2?|svg)(\?v=[0-9]\.[0-9]\.[0-9]))|(woff2?|svg|jpe?g|png|gif|ico)$/, loader: 'url?limit=10000' },
-      { test: /\.((ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9]))|(ttf|eot)$/, loader: 'file' },
+      { test: /\.((ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9]))|(ttf|eot)$/, loader: 'url' },
       //json
       { test: /\.json$/, loader: 'json' }
     ]
@@ -63,7 +63,7 @@ module.exports = {
     //Forbid transpile while build has errors
     new webpack.NoErrorsPlugin(),
     //Extract css to single file
-    new ExtractTextPlugin('bundle.css'),
+    new ExtractTextPlugin('[name]-styles.css'),
     //Compress result bundle js
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
